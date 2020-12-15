@@ -21,6 +21,12 @@ export default {
       },
     },
     {
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+      description: 'Tell us a bit about them.',
+    },
+    {
       name: 'image',
       title: 'Image',
       type: 'image',
