@@ -1,11 +1,12 @@
 import React from 'react';
 import PatchEvent, { set, unset } from 'part:@sanity/form-builder/patch-event';
 
+// TODO: read into what PatchEvent does behind the curtains
 function createPatchFrom(value) {
   return PatchEvent.from(value === '' ? unset() : set(Number(value)));
 }
 
-// Intl is a built in fn
+// Intl is a built-in fn
 const formatMoney = Intl.NumberFormat('en-CA', {
   style: 'currency',
   currency: 'CAD',
@@ -28,6 +29,7 @@ export default function PriceInput({ type, value, onChange, inputComponent }) {
   );
 }
 
+// for accessibility
 PriceInput.focus = function () {
   this._inputElement.focus();
 };
