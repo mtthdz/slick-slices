@@ -34,9 +34,9 @@ export default {
       name: 'price',
       title: 'Price',
       type: 'number',
-      inputComponent: PriceInput,
       description: 'Price of the pizza in cents',
       validation: (Rule) => Rule.min(1000).max(5000),
+      inputComponent: PriceInput,
     },
     {
       name: 'toppings',
