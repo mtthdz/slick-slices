@@ -37,5 +37,11 @@ export default {
       validation: (Rule) => Rule.min(1000).max(5000),
       // TODO: Add custom input component
     },
+    {
+      name: 'toppings',
+      title: 'Toppings',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'topping' }] }],
+    },
   ],
 };

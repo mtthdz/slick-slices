@@ -8,7 +8,7 @@ export default {
   fields: [
     {
       name: 'name',
-      title: 'Topping Name',
+      title: 'Pizza Name',
       type: 'string',
       description: 'What is the name of the topping?',
     },
@@ -27,8 +27,8 @@ export default {
       name: 'name',
       vegetarian: 'vegetarian',
     },
-    prepare: (name, vegetarian) => ({
-      title: `${name} ${vegetarian ? '🥬' : ''}`,
+    prepare: ({ name, vegetarian }) => ({
+      title: `${name} ${vegetarian ? '🌱' : ''}`,
     }),
   },
 };
