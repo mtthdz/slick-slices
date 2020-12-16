@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import Img from 'gatsby-image';
 
 // no need to export, since we're only using it within this component
 function SinglePizza({ pizza }) {
@@ -10,6 +11,7 @@ function SinglePizza({ pizza }) {
           <span className="mark">{pizza.name}</span>
         </h2>
         <p>{pizza.toppings.map((topping) => topping.name).join(', ')}</p>
+        <Img fluid={pizza.image.asset.fluid} alt={pizza.name} />
       </Link>
     </div>
   );
