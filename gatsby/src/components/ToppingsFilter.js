@@ -1,4 +1,4 @@
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 import React from 'react';
 
 function countPizzasInToppings(pizzas) {
@@ -13,12 +13,13 @@ function countPizzasInToppings(pizzas) {
       const existingTopping = acc[topping.id];
       if (existingTopping) {
         existingTopping.count += 1;
+      } else {
+        acc[topping.id] = {
+          id: topping.id,
+          name: topping.name,
+          count: 1,
+        };
       }
-      acc[topping.id] = {
-        id: topping.id,
-        name: topping.name,
-        count: 1,
-      };
       return acc;
     }, {});
 
@@ -60,7 +61,12 @@ export default function ToppingsFilter() {
 
   return (
     <div>
-      <p>Toppings </p>
+      {toppingsWithCounts.map((topping) => (
+        <Link to={`/topping/${topping.name}`} key={topping.id}>
+          <span className="name">{topping.name}</span>
+          <span className="count">{topping.count}</span>
+        </Link>
+      ))}
     </div>
   );
 }
