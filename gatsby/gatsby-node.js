@@ -19,7 +19,13 @@ async function turnPizzasIntoPages({ graphql, actions }) {
 
   // 3. loop over each pizza and create a page for that pizza
   data.pizzas.nodes.forEach((pizza) => {
-    console.log(pizza.name);
+    actions.createPage({
+      path: `pizza/${pizza.slug.current}`,
+      component: pizzaTemplate,
+      context: {
+        slug: pizza.slug.current,
+      },
+    });
   });
 }
 
