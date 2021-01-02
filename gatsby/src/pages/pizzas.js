@@ -16,8 +16,10 @@ export default function PizzasPage({ data }) {
 // gatsby will know that you're calling graphql here and run it in and store in the props param
 // note the query looks like how its written in graphiql
 export const query = graphql`
-  query PizzaQuery {
-    pizzas: allSanityPizza {
+  query PizzaQuery($topping: [String]) {
+    pizzas: allSanityPizza(
+      filter: { toppings: { elemMatch: { name: { in: $topping } } } }
+    ) {
       nodes {
         name
         id
