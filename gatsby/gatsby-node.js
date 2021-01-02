@@ -29,7 +29,7 @@ async function turnPizzasIntoPages({ graphql, actions }) {
   });
 }
 
-async function turnToppingsIntoPages() {
+async function turnToppingsIntoPages(params) {
   // 1. get a template for this page
   const toppingTemplate = path.resolve('./src/templates/Topping.js');
   // 2. query all pizzas with that toppings
@@ -38,9 +38,9 @@ async function turnToppingsIntoPages() {
 
 export async function createPages(params) {
   // create pages dynamically
-  // 1. pizzas
-  await turnPizzasIntoPages(params);
-  // 2. toppings
-  await turnToppingsIntoPages();
-  // 3. slicemasters
+  // we can use a .all array to run all our await fn's concurrently
+  await Promise.all([
+    turnPizzasIntoPages(params),
+    turnToppingsIntoPages(params)
+  ]);
 }
