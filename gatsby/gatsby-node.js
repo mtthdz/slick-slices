@@ -29,10 +29,31 @@ async function turnPizzasIntoPages({ graphql, actions }) {
   });
 }
 
-async function turnToppingsIntoPages(params) {
-  // 1. get a template for this page
-  const toppingTemplate = path.resolve('./src/templates/Topping.js');
-  // 2. query all pizzas with that toppings
+async function turnToppingsIntoPages({ graphql, actions }) {
+  // we are going to recycle the pizza page instead of creating a separate template
+  // note we are recycling the page, not template
+  const toppingTemplate = path.resolve('./src/pages/pizzas.js');
+  const { data } = await graphql(`
+    query {
+      toppings: allSanityTopping {
+        nodes {
+          name
+          id
+        }
+      }
+    }
+  `);
+
+  data.toppings.nodes.forEach((topping) => {
+    actions.createPage({
+      path: `topping/${topping.name}`,
+      component: toppingTemplate,
+      context: {
+        topping: topping.name,
+        // TODO regex
+      },
+    });
+  });
   // 3. loop over each topping and create a page for that toppings
 }
 
@@ -41,6 +62,6 @@ export async function createPages(params) {
   // we can use a .all array to run all our await fn's concurrently
   await Promise.all([
     turnPizzasIntoPages(params),
-    turnToppingsIntoPages(params)
+    turnToppingsIntoPages(params),
   ]);
 }
