@@ -29,10 +29,18 @@ async function turnPizzasIntoPages({ graphql, actions }) {
   });
 }
 
+async function turnToppingsIntoPages() {
+  // 1. get a template for this page
+  const toppingTemplate = path.resolve('./src/templates/Topping.js');
+  // 2. query all pizzas with that toppings
+  // 3. loop over each topping and create a page for that toppings
+}
+
 export async function createPages(params) {
   // create pages dynamically
   // 1. pizzas
   await turnPizzasIntoPages(params);
   // 2. toppings
+  await turnToppingsIntoPages();
   // 3. slicemasters
 }
