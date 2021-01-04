@@ -84,6 +84,13 @@ async function fetchBeersAndTurnIntoNodes({
   }
 }
 
+async function turnSlicemastersIntoPages({ graphql, actions}) {
+  // 1. query all slicemasters
+  // TODO: 2. turn each slicemaster into their own page
+  // 3. figure out how many pages there are based on how many slicemasters per page
+  // 4. loop from 1 to n and create pages for them
+}
+
 export async function sourceNodes(params) {
   // fetch list of beers and source them into gatsby api
   await Promise.all([fetchBeersAndTurnIntoNodes(params)]);
@@ -95,5 +102,6 @@ export async function createPages(params) {
   await Promise.all([
     turnPizzasIntoPages(params),
     turnToppingsIntoPages(params),
+    turnSlicemastersIntoPages(params),
   ]);
 }
