@@ -43,6 +43,8 @@ export default function SlicemastersPage({ data, pageContext }) {
   return (
     <>
       <Pagination
+        // bc pagination is being rendered as a component of slicemasters and not by gatsby-node,
+        // we need to directly pull from .env not from gatsby-node
         pageSize={parseInt(process.env.GATSBY_PAGE_SIZE)}
         totalCount={data.slicemasters.totalCount}
         currentPage={pageContext.currentPage || 1}
