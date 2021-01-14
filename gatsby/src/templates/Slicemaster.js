@@ -4,10 +4,15 @@ import Img from 'gatsby-image';
 import styled from 'styled-components';
 
 // how to destructure a property two levels deep in a parameter:
-export default function SlicemasterPage({ data }) {
-  console.log(data);
+export default function SlicemasterPage({ data: { person } }) {
   return (
-    <p>nice</p>
+    <div className="center">
+      <Img fluid={person.image.asset.fluid} />
+      <h2>
+        <span className="mark">{person.name}</span>
+      </h2>
+      <p>{person.description}</p>
+    </div>
   );
 }
 
